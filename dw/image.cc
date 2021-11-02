@@ -142,6 +142,8 @@ int ImageMapsList::link (object::Object *key, int x, int y)
 
 int Image::CLASS_ID = -1;
 
+int Image::lastallocationx = 0;
+
 Image::Image(const char *altText)
 {
    DBG_OBJ_CREATE ("dw::Image");
@@ -220,7 +222,29 @@ void Image::sizeRequestSimpl (core::Requisition *requisition)
          getStyle()->minHeight != core::style::LENGTH_AUTO ||
          getStyle()->maxHeight != core::style::LENGTH_AUTO;
 
-      if (!widthSpecified && heightSpecified)
+      // XXX: After a browser windows is resized and the page is
+      // refreshed allocation.x becomes -1 in this scope and I don't
+      // know of a better way to check what the new value should be.
+      // This public static int Image::lastallocationx is my hacked
+      // way of trying to remember it. It's updated in Image::sizeAllocateImpl
+      // Surely there's a better way :p. Nevertheless, this seems to
+      // work during the initial page load.
+      if (allocation.x < 0)
+         allocation.x = lastallocationx;
+      else
+         lastallocationx = allocation.x;
+
+      // XXX: If an image is not going to fit in the viewport, resize it to fit
+      // TODO: I ignored boxDiffWidth() and boxOffsetY() and boxRestHeight()
+      // for no good reason :s.
+      if ((allocation.x + requisition->width) > layout->getWidthViewport()) {
+         heightSpecified = false;
+         requisition->width = layout->getWidthViewport() - 2 * allocation.x;
+         requisition->ascent = requisition->width
+            * buffer->getRootHeight () / buffer->getRootWidth ();
+         requisition->descent = 0;
+      }
+      else if (!widthSpecified && heightSpecified)
          requisition->width =
             (requisition->ascent + requisition->descent - boxDiffHeight ())
             * buffer->getRootWidth () / buffer->getRootHeight ()
@@ -293,6 +317,14 @@ void Image::sizeAllocateImpl (core::Allocation *allocation)
 
       bufWidth = newBufWidth;
       bufHeight = newBufHeight;
+
+      // TODO: Surely there's a better place (and a better way) to remember
+      // the allocation->x of an image?! This was the best place I could think
+      // of - at least it works with initial page loads - and _sortof_ works
+      // when pages are refreshed (although I had to force the value to 0
+      // in Image::setBuffer to avoid the more annoying issue of using stale
+      // values when isolating an image, or going back in cached history.
+      lastallocationx = allocation->x;
 
       DBG_OBJ_ASSOC_CHILD (this->buffer);
       DBG_OBJ_SET_NUM ("bufWidth", bufWidth);
@@ -485,6 +517,13 @@ core::Iterator *Image::iterator (core::Content::Type mask, bool atEnd)
 void Image::setBuffer (core::Imgbuf *buffer, bool resize)
 {
    core::Imgbuf *oldBuf = this->buffer;
+
+   // TODO: I hack this to 0 to avoid using stale values when viewing
+   // a single image (Isolate image), and when going back in the browser
+   // history - but this sucks because when going back to a cached page
+   // lastallocationx isn't updated "properly" like it was during the
+   // initial page load. Hmmm.
+   lastallocationx = 0;
 
    if (wasAllocated () && needsResize () &&
       getContentWidth () > 0 && getContentHeight () > 0) {

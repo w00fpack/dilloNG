@@ -151,6 +151,8 @@ protected:
 public:
    static int CLASS_ID;
 
+   static int lastallocationx;
+
    Image(const char *altText);
    ~Image();
 
