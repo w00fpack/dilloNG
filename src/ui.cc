@@ -37,7 +37,7 @@ struct iconset {
    Fl_Image *ImgMeterOK, *ImgMeterBug,
             *ImgHome, *ImgReload, *ImgSave, *ImgBook, *ImgTools,
             *ImgClear,*ImgSearch, *ImgHelp, *ImgLeft, *ImgLeftIn,
-            *ImgRight, *ImgRightIn, *ImgStop, *ImgStopIn;
+            *ImgRight, *ImgRightIn, *ImgStop, *ImgStopIn, *ImgNewTab;
 };
 
 static struct iconset standard_icons = {
@@ -57,6 +57,7 @@ static struct iconset standard_icons = {
    NULL,
    new Fl_Pixmap(stop_xpm),
    NULL,
+   new Fl_Pixmap(newtab_xpm),
 };
 
 static struct iconset small_icons = {
@@ -76,6 +77,7 @@ static struct iconset small_icons = {
    NULL,
    new Fl_Pixmap(stop_s_xpm),
    NULL,
+   new Fl_Pixmap(newtab_s_xpm),
 };
 
 
@@ -353,6 +355,11 @@ static void b1_cb(Fl_Widget *wid, void *cb_data)
                        wid->y() + wid->h());
       }
       break;
+   case UI_NEW_TAB:
+      if (b == FL_LEFT_MOUSE || b == FL_RIGHT_MOUSE) {
+		   a_UIcmd_open_url_nt(a_UIcmd_get_bw_by_widget(wid), NULL, 1);
+      }
+      break;
    default:
       break;
    }
@@ -426,10 +433,11 @@ void UI::make_toolbar(int tw, int th)
    Forw = make_button("Forw", icons->ImgRight, icons->ImgRightIn, UI_FORW);
    Home = make_button("Home", icons->ImgHome, NULL, UI_HOME);
    Reload = make_button("Reload", icons->ImgReload, NULL, UI_RELOAD);
-   Save = make_button("Save", icons->ImgSave, NULL, UI_SAVE);
    Stop = make_button("Stop", icons->ImgStop, icons->ImgStopIn, UI_STOP);
+   Save = make_button("Save", icons->ImgSave, NULL, UI_SAVE);
    Bookmarks = make_button("Book", icons->ImgBook, NULL, UI_BOOK);
    Tools = make_button("Tools", icons->ImgTools, NULL, UI_TOOLS);
+   NewTab = make_button("New Tab", icons->ImgNewTab, NULL, UI_NEW_TAB);
 
    Back->set_tooltip("Previous page");
    Forw->set_tooltip("Next page");
@@ -439,6 +447,7 @@ void UI::make_toolbar(int tw, int th)
    Stop->set_tooltip("Stop loading");
    Bookmarks->set_tooltip("View bookmarks");
    Tools->set_tooltip("Settings");
+   NewTab->set_tooltip("New Tab");
 }
 
 /*
@@ -569,8 +578,8 @@ void UI::make_panel(int ww)
       NavBar = new CustGroupHorizontal(0,0,ww,nh);
       NavBar->box(FL_NO_BOX);
       NavBar->begin();
-       make_toolbar(ww,bh);
        make_filemenu_button();
+       make_toolbar(ww,bh);
        make_location(ww);
        NavBar->resizable(LocationGroup);
        make_progress_bars(0,1);
