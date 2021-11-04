@@ -68,6 +68,8 @@ char *a_Url_str(const DilloUrl *u)
 
    dReturn_val_if_fail (url != NULL, NULL);
 
+   url->path = (! url->path)      ? "/" : url->path;	// Make sure that the path is at least "/"
+
    if (!url->url_string) {
       url->url_string = dStr_sized_new(60);
       dStr_sprintf(
@@ -442,7 +444,7 @@ DilloUrl* a_Url_new(const char *url_str, const char *base_url)
             strcpy((char *)url->authority + len-2, "443");
          }
       }
-      
+
       dStr_free(url->url_string, TRUE);
       url->url_string = NULL;
    }
