@@ -107,6 +107,23 @@ static void Menu_open_url_nw_cb(Fl_Widget*, void *user_data)
 }
 
 /*
+ * Open URL in media player
+ */
+static void Menu_open_url_mp_cb(Fl_Widget*, void *user_data)
+{
+   DilloUrl *url = (DilloUrl *)user_data;
+
+    char str[500];    // FIXME: make this the size necessary to contain everything and not have buffer overflow
+
+    strcpy (str, prefs.media_player);
+    strcat(str, " ");
+    strcat (str, URL_STR_(url));
+    strcat(str, "> /dev/null 2>&1 &");
+    puts (str);
+    system(str);
+}
+
+/*
  * Open URL in new Tab
  */
 static void Menu_open_url_nt_cb(Fl_Widget*, void *user_data)
@@ -421,8 +438,8 @@ void a_Menu_page_popup(BrowserWindow *bw, const DilloUrl *url,
 
 static Fl_Menu_Item link_menu[] = {
    {"Open link in new tab", 0, Menu_open_url_nt_cb,0,0,0,0,0,0},
-   {"Open link in new window", 0, Menu_open_url_nw_cb,0,FL_MENU_DIVIDER,0,0,
-    0,0},
+   {"Open link in new window", 0, Menu_open_url_nw_cb,0,FL_MENU_DIVIDER,0,0,0,0},
+   {"Open link with media player", 0, Menu_open_url_mp_cb,0,FL_MENU_DIVIDER,0,0,0,0},
    {"Bookmark this link", 0, Menu_add_bookmark_cb,0,0,0,0,0,0},
    {"Copy link location", 0, Menu_copy_urlstr_cb,0,FL_MENU_DIVIDER,0,0,0,0},
    {"Save link as...", 0, Menu_save_link_cb,0,0,0,0,0,0},
