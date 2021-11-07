@@ -685,10 +685,15 @@ static char *UIcmd_find_search_str(const char *str)
          if (search && strncasecmp(str, search, len) == 0) {
             prefs.search_url_idx = p;
             url = UIcmd_make_search_str(str + len + 1);
+            return url;
             break;
          }
       }
+
+      prefs.search_url_idx = 0;
+      url = UIcmd_make_search_str(str);
    }
+
    return url;
 }
 
