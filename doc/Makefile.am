@@ -1,4 +1,8 @@
-dist_doc_DATA = user_help.html
+SUBDIRS = speeddial_icons
+
+dist_doc_DATA = user_help.html \
+	speeddial.html
+
 man_MANS = dillo.1
 EXTRA_DIST = \
 	README \

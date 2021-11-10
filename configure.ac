@@ -530,6 +530,7 @@ AC_CONFIG_FILES([
     dpid/Makefile
     dpi/Makefile
     doc/Makefile
+    doc/speeddial_icons/Makefile
     dw/Makefile
     lout/Makefile
     src/Makefile
