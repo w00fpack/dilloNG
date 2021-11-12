@@ -299,16 +299,28 @@ search_url="v Deviant Art https://www.deviantart.com/search?q=%s"
 # better fits your distro.
 
 #
-# Gray theme (traditional)
+# w00f theme
 #
 ui_fg_color=black
-ui_main_bg_color=#c6c6c6
-ui_text_bg_color=#bfdabf
+ui_main_bg_color=#E8E8FF
+ui_text_bg_color=#FFFFFF
 ui_selection_color=#191970
 ui_button_highlight_color=#a9a9a9
-ui_tab_active_bg_color=#87aca7
+ui_tab_active_bg_color=#D3E7F3
 ui_tab_active_fg_color=black
-ui_tab_bg_color=#b7beb7
+ui_tab_bg_color=#A4CCE3
+
+#
+# Gray theme (traditional)
+#
+#ui_fg_color=black
+#ui_main_bg_color=#c6c6c6
+#ui_text_bg_color=#bfdabf
+#ui_selection_color=#191970
+#ui_button_highlight_color=#a9a9a9
+#ui_tab_active_bg_color=#87aca7
+#ui_tab_active_fg_color=black
+#ui_tab_bg_color=#b7beb7
 
 #
 # Earthly theme:
