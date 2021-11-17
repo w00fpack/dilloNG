@@ -130,5 +130,5 @@ dillo_SOURCES = \
 	xembed.cc \
 	xembed.hh
 
-dist_sysconf_DATA = domainrc keysrc hsts_preload
+dist_sysconf_DATA = domainrc keysrc hsts_preload bm.txt
 EXTRA_DIST = chg srch
