@@ -40,7 +40,7 @@ media_player=mpv -ytdl-format='bestvideo[height<=?360]+bestaudio/best
 #buffered_drawing=1
 
 # Set your default directory for download/save operations
-#save_dir=/tmp
+save_dir=~/
 
 #-------------------------------------------------------------------------
 #                           RENDERING SECTION
@@ -148,10 +148,12 @@ media_player=mpv -ytdl-format='bestvideo[height<=?360]+bestaudio/best
 # start_page="http://www.dillo.org"
 # start_page="file:/home/jcid/custom_page.html"
 #start_page="about:splash"
+start_page="file:/usr/share/doc/dillo/speeddial.html"
 
 # Set the home location
 # home="file:/home/jcid/HomePage/Home.html"
 #home="http://www.dillo.org/"
+home="file:/usr/share/doc/dillo/speeddial.html"
 
 # Set the URLs used by the web search dialog.
 # "%s" is replaced with the search keywords separated by '+'.
@@ -159,6 +161,8 @@ media_player=mpv -ytdl-format='bestvideo[height<=?360]+bestaudio/best
 # You can enable multiple search_url strings at once and select from among
 # them at runtime, with the first being the default.
 # (the prefix serves to search from the Location Bar. e.g. "dd dillo image")
+# NOTE:  THE FIRST search_url ENTRY WILL BE THE DEFAULT SEARCH ENGINE
+# IF NO SEARCH KEYWORD IS FOUND IN YOUR SEARCH REQUEST
 search_url="g Google http://www.google.com/search?source=hp&biw=&bih=&gbv=1&q=%s"
 search_url="d DuckDuckGo (https) https://duckduckgo.com/lite/?kp=-1&q=%s"
 search_url="w Wikipedia http://www.wikipedia.org/w/index.php?search=%s&go=Go"
@@ -241,9 +245,10 @@ search_url="v Deviant Art https://www.deviantart.com/search?q=%s"
 # bg_color=gray
 # bg_color=0xd6d6c0
 #bg_color=0xdcd1ba
+bg_color=white
 
 # If your eyes suffer with white backgrounds, change this.
-#allow_white_bg=YES
+allow_white_bg=YES
 
 # If allow_white_bg is set to NO, white backgrounds are replaced by
 # this color.
@@ -350,7 +355,7 @@ ui_tab_bg_color=#A4CCE3
 # tiny   : buttons, location, and progress boxes in one row
 # small  : location in one row, buttons + progress boxes in another
 # medium : adds text labels to buttons and boxes
-# panel_size=tiny
+ panel_size=tiny
 # panel_size=small
 #panel_size=medium
 
@@ -386,7 +391,7 @@ ui_tab_bg_color=#A4CCE3
 
 # A mouse's middle click over a link opens a new Tab.
 # If you prefer to open a new Window instead, set it to NO.
-#middle_click_opens_new_tab=YES
+middle_click_opens_new_tab=YES
 
 # A mouse's middle click over a tab closes the Tab.
 # With mousewheel mouses, right click feels way better (set to YES).
@@ -399,7 +404,7 @@ ui_tab_bg_color=#A4CCE3
 
 # Focus follows new Tabs.
 # You can hold SHIFT to temporarily revert this behaviour.
-#focus_new_tab=YES
+focus_new_tab=NO
 
 # Ask before quitting Dillo with more than one window or tab open.
 #show_quit_dialog=YES

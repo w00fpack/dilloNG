@@ -1,7 +1,7 @@
 # Overview
 [![screenshot](https://raw.githubusercontent.com/w00fpack/dilloNG/main/screenshots/main.jpg)](https://raw.githubusercontent.com/w00fpack/dilloNG/main/screenshots/main.jpg)
 
-Dillo is a lightweight Linux web browser that does not use Javascript..  This DilloNG is a port of the official Dillo that is located at https://www.dillo.org.  It holds new concepts that will hopefully make it into the official releases.  This repository will also help with CI/CD automation.
+Dillo is a lightweight (about 10MB) Linux web browser that does not use Javascript..  This DilloNG is a port of the official Dillo that is located at https://www.dillo.org.  It holds new concepts that will hopefully make it into the official releases.  This repository will also help with CI/CD automation.
 
 Lightweight browsers, such as Dillo, are beneficial for loading websites quickly.  Also, lightweight web browsers can work on older hardware where common browser would take up too many resources, that could freeze up your computer.
 
@@ -28,10 +28,16 @@ Please check under releases
 ## Requirements
 
 Please see https://www.dillo.org for requirement details.
+FLTK
 
 ## INSTALLATION AND COMPILING
 
-There is an INSTALLATION file in this repository that might be of value.  You can also visit https://www.dillo.org for installation details details.
+There is an INSTALL file in this repository that might be of value.  You can also visit https://www.dillo.org for installation details details.
+
+./autogen.sh
+./configure --enable-ssl
+make
+make install
 
 # Quickstart
 
