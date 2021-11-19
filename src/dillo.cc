@@ -448,6 +448,9 @@ int main(int argc, char **argv)
    if ((fp = Paths::getPrefsFP(PATHS_RC_PREFS))) {
       PrefsParser::parse(fp);
    }
+   // parse bm.txt
+   if ((fp = Paths::getPrefsFP(PATHS_BM))) {
+   }
    // parse keysrc
    if ((fp = Paths::getPrefsFP(PATHS_RC_KEYS))) {
       Keys::parse(fp);
