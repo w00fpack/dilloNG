@@ -1,4 +1,4 @@
-name: Release with Artifacts
+name: Release with Artifacts Bionic 64
 
 on:
   workflow_dispatch:
