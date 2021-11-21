@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
 
+      - name: Install FLTK
+        run: |
+          sudo apt-get update
+          sudo apt-get install libfltk1.3
+          sudo apt-get install libfltk1.3-dev
+
       - name: Code Checkout
         uses: actions/checkout@v2
         with:
@@ -46,11 +52,9 @@ jobs:
         run: cd build && dpkg-buildpackage -b -uc -us && ls -ltr | tail -2 && cd ..
 
       - name: Make PET config file
-        run: echo "dillo-3.1|dillo|3.1||Internet|9204K||dillo-3.1.pet|libfltk1.3,libmbedcrypto3|Lightweight browser|ubuntu|focal||" > build/pet.specs
-        
-      - name: Make PET package
-        id: make_pet
-        run: mv build dillo-3.1 && tar -c -f dillo-3.1.tar dillo-3.1/ && xz -z -6 -e -T 0 dillo-3.1.tar && echo -n `md5sum dillo-3.1.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.tar.xz && mv dillo-3.1.tar.xz dillo-3.1_fossa64.pet
+        run: |
+          echo "dillo-3.1|dillo|3.1||Internet|9204K||dillo-3.1.pet|libfltk1.3,libmbedcrypto3|Lightweight browser|ubuntu|focal||" > build/pet.specs
+          mv build dillo-3.1 && tar -c -f dillo-3.1.tar dillo-3.1/ && xz -z -6 -e -T 0 dillo-3.1.tar && echo -n `md5sum dillo-3.1.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.tar.xz && mv dillo-3.1.tar.xz dillo-3.1_fossa64.pet
         
       - name: Get App Version
         id: version
