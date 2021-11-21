@@ -60,11 +60,11 @@ jobs:
         id: version
         run: echo "::set-output name=version::$(./myapp --version)"
 
-      - name: Build Changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #- name: Build Changelog
+      #  id: build_changelog
+      #  uses: mikepenz/release-changelog-builder-action@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         id: create_release
