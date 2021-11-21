@@ -1,4 +1,4 @@
-name: Release with Artifacts
+name: Artifact Release Fossa64
 
 on:
   workflow_dispatch:
@@ -8,9 +8,16 @@ on:
 
 jobs:
   make_release_fossa:
-    name: Make Release with Binaries and Source
+    name: Make Fossa64 Binaries
     runs-on: ubuntu-20.04
     steps:
+
+      - name: Install FLTK
+        run: |
+          sudo apt-get update
+          sudo apt-get install libfltk1.3
+          sudo apt-get install libfltk1.3-dev
+          sudo apt-get install gcc-multilib g++-multilib
 
       - name: Code Checkout
         uses: actions/checkout@v2
@@ -20,47 +27,89 @@ jobs:
       - name: Autogen
         run: ./autogen.sh
 
-      - name: Configure
+      # _______________________________________________________________________
+      - name: Configure 64bit
         run: ./configure --enable-ssl --prefix=/usr
 
       - name: Make
         run: make
 
-      - name: Check
-        run: make check
+      - name: Make Checks
+        run: |
+          make check
+          make installcheck
 
-      - name: Install check
-        run: make installcheck
+      - name: Make Install
+        run: make install DESTDIR=/home/runner/work/dilloNG/build
 
-      - name: Make Build
-        run: make install DESTDIR=./build
+      - name: Artifact Build - fossa64 bin txz
+        run: |
+          cd /home/runner/work/dilloNG/build
+          tar -cvJf ../dillo_3.1.0_fossa64_bin.tar.xz .
+          cd .. && pwd
+          ls -lh *.xz
 
-      - name: build fossa64 bin artifact
-        run: cd ./build && tar -cvJf ../dillo_3.1.0_fossa64_bin.tar.xz . && cd .. && pwd &&  ls -lh *.xz
+      - name: Artifact Build - SquashFS package
+        run: mksquashfs /home/runner/work/dilloNG/build/ /home/runner/work/dilloNG/dillo_3.1.0_fossa64.sfs -comp zstd -Xcompression-level 22
 
-      - name: Make SquashFS file
-        run: mksquashfs build/ dillo_3.1.0_fossa64.sfs -comp zstd -Xcompression-level 22
+     # - name: Make Deb package
+     #   id: make_deb
+     #   run: cd /home/runner/work/dilloNG/build && dpkg-buildpackage -b -uc -us && ls -ltr | tail -2 && cd ..
 
-      - name: Make Deb package
-        id: make_deb
-        run: cd build && dpkg-buildpackage -b -uc -us && ls -ltr | tail -2 && cd ..
-
-      - name: Make PET config file
-        run: echo "dillo-3.1|dillo|3.1||Internet|9204K||dillo-3.1.pet|libfltk1.3,libmbedcrypto3|Lightweight browser|ubuntu|focal||" > build/pet.specs
+      - name: Artifact Build - PET package
+        run: |
+          cd /home/runner/work/dilloNG/
+          echo "dillo-3.1|dillo|3.1||Internet|9204K||dillo-3.1.pet|libfltk1.3,libmbedcrypto3|Lightweight browser|ubuntu|focal||" > build/pet.specs
+          mv build dillo-3.1
+          tar -c -f dillo-3.1.tar dillo-3.1/
+          xz -z -6 -e -T 0 dillo-3.1.tar
+          echo -n `md5sum dillo-3.1.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.tar.xz
+          mv dillo-3.1.tar.xz dillo-3.1_fossa64.pet
         
-      - name: Make PET package
-        id: make_pet
-        run: mv build dillo-3.1 && tar -c -f dillo-3.1.tar dillo-3.1/ && xz -z -6 -e -T 0 dillo-3.1.tar && echo -n `md5sum dillo-3.1.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.tar.xz && mv dillo-3.1.tar.xz dillo-3.1_fossa64.pet
-        
+      # _______________________________________________________________________
+#      - name: Configure 32 bit
+#        run: ./configure --enable-ssl --prefix=/usr --host=i686-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
+#
+#      - name: Make
+#        run: make clean && make
+#
+#      - name: Make Checks
+#        run: |
+#          make check
+#          make installcheck
+#
+#      - name: Make Build
+#        run: make install DESTDIR=/home/runner/work/dilloNG/build
+#
+#      - name: Artifact Build - fossa32 bin txz
+#        run: cd /home/runner/work/dilloNG/build && tar -cvJf ../dillo_3.1.0_fossa32_bin.tar.xz . && cd .. && pwd &&  ls -lh *.xz
+#
+#      - name: Artifact Build - SquashFS package
+#        run: mksquashfs /home/runner/work/dilloNG/build/ dillo_3.1.0_fossa32.sfs -comp zstd -Xcompression-level 22
+#
+#     # - name: Make Deb package
+#     #   id: make_deb
+#     #   run: cd /home/runner/work/dilloNG/build && dpkg-buildpackage -b -uc -us && ls -ltr | tail -2 && cd ..
+#
+#      - name: Artifact Build - PET package
+#        run: |
+#          echo "dillo-3.1|dillo|3.1||Internet|9204K||dillo-3.1.pet|libfltk1.3,libmbedcrypto3|Lightweight browser|ubuntu|focal||" > build/pet.specs
+#          mv /home/runner/work/dilloNG/build /home/runner/work/dilloNG/dillo-3.1
+#          tar -c -f /home/runner/work/dilloNG/dillo-3.1.tar dillo-3.1/
+#          xz -z -6 -e -T 0 dillo-3.1.tar
+#          echo -n `md5sum /home/runner/work/dilloNG/dillo-3.1.tar.xz | cut -f 1 -d ' '` >> /home/runner/work/dilloNG/dillo-3.1.tar.xz
+#          mv /home/runner/work/dilloNG/dillo-3.1.tar.xz /home/runner/work/dilloNG/dillo-3.1_fossa32.pet
+
+      # _______________________________________________________________________
       - name: Get App Version
         id: version
         run: echo "::set-output name=version::$(./myapp --version)"
 
-      - name: Build Changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #- name: Build Changelog
+      #  id: build_changelog
+      #  uses: mikepenz/release-changelog-builder-action@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         id: create_release
@@ -72,42 +121,78 @@ jobs:
           tag_name: Release 3.1_eval
           # release_name: ${{ steps.version.outputs.version }} # Could use from version field above
           # release_name: Release ${{ github.ref }} # Overrides if you used "Draft a new release" button > name field
-          release_name: Release 3.1_test
+          release_name: Release 3.1_eval
           # body_path: CHANGELOG.md
           # body: ${{steps.build_changelog.outputs.changelog}} # Overrides if you used "Draft a new release" button > body field TODO: append to body
           # body: Dillo release 3.1 with updates from this repository
           draft: true
           prerelease: true
 
-      - name: Upload Release Artifact / Asset
-        id: upload-release-asset
+      # _______________________________________________________________________
+      - name: Upload Artifact / Asset - base 64
+        id: artifact_base_64
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./dillo_3.1.0_fossa64_bin.tar.xz
+          asset_path: /home/runner/work/dilloNG/dillo_3.1.0_fossa64_bin.tar.xz
           asset_name: dillo_3.1.0_fossa64_bin.tar.xz
           asset_content_type: application/x-xz
 
-      - name: Upload Release Artifact / Asset SFS
-        id: upload-release-asset-sfs
+      - name: Upload Artifact / Asset - SFS 64
+        id: artifact_sfs_64
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./dillo_3.1.0_fossa64.sfs
+          asset_path: /home/runner/work/dilloNG/dillo_3.1.0_fossa64.sfs
           asset_name: dillo_3.1.0_fossa64.sfs
           asset_content_type: application/x-xz
 
-      - name: Upload Release Artifact / Asset PET
-        id: upload-release-asset-pet
+      - name: Upload Artifact / Asset - PET 64
+        id: artifact_pet_64
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./dillo-3.1_fossa64.pet
+          asset_path: /home/runner/work/dilloNG/dillo-3.1_fossa64.pet
           asset_name: dillo-3.1_fossa64.pet
           asset_content_type: application/x-xz
+
+      # _______________________________________________________________________
+#      - name: Upload Artifact / Asset - base 32
+#        id: artifact_base_32
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }} # pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+#          asset_path: ./dillo_3.1.0_fossa32_bin.tar.xz
+#          asset_name: dillo_3.1.0_fossa32_bin.tar.xz
+#          asset_content_type: application/x-xz
+#
+#      - name: Upload Artifact / Asset - SFS 32
+#        id: artifact_sfs_32
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }} # pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+#          asset_path: ./dillo_3.1.0_fossa32.sfs
+#          asset_name: dillo_3.1.0_fossa32.sfs
+#          asset_content_type: application/x-xz
+#
+#      - name: Upload Artifact / Asset - PET 32
+#        id: artifact_pet_32
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }} # pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+#          asset_path: ./dillo-3.1_fossa32.pet
+#          asset_name: dillo-3.1_fossa32.pet
+#          asset_content_type: application/x-xz
+
