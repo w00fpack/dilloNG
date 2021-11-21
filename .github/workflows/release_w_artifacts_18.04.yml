@@ -39,14 +39,14 @@ jobs:
           make check
           make installcheck
 
-      - name: Make Build
+      - name: Make Distribution Folder
         run: make install DESTDIR=./build
 
       - name: Artifact Build - Bionic64 - bin txz
         run: cd ./build && tar -cvJf ../dillo_3.1.0_bionic64_bin.tar.xz . && cd .. && pwd &&  ls -lh *.xz
 
       - name: Artifact Build - Bionic64 - SquashFS package
-        run: mksquashfs build/ dillo_3.1.0_bionic64.sfs -comp zstd -Xcompression-level 22
+        run: mksquashfs build/ dillo_3.1.0_bionic64.sfs
 
      # - name: Artifact Build - Bionic64 - Deb package
      #   id: make_deb
