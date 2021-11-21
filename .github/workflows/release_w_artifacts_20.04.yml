@@ -47,9 +47,9 @@ jobs:
       - name: Make SquashFS file
         run: mksquashfs build/ dillo_3.1.0_fossa64.sfs -comp zstd -Xcompression-level 22
 
-      - name: Make Deb package
-        id: make_deb
-        run: cd build && dpkg-buildpackage -b -uc -us && ls -ltr | tail -2 && cd ..
+     # - name: Make Deb package
+     #   id: make_deb
+     #   run: cd build && dpkg-buildpackage -b -uc -us && ls -ltr | tail -2 && cd ..
 
       - name: Make PET config file
         run: |
