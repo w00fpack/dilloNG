@@ -1,4 +1,4 @@
-name: Release with Artifacts
+name: Artifact Release Fossa64
 
 on:
   workflow_dispatch:
