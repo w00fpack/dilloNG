@@ -55,7 +55,7 @@ jobs:
       - name: Artifact Build - Bionic64 - PET package
         run: |
           echo "dillo-3.1|dillo|3.1||Internet|9204K||dillo-3.1.pet|libfltk1.3,libmbedcrypto3|Lightweight browser|ubuntu|focal||" > build/pet.specs
-          mv build dillo-3.1 && tar -c -f dillo-3.1.tar dillo-3.1/ && xz -z -6 -e -T 0 dillo-3.1.tar && echo -n `md5sum dillo-3.1.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.tar.xz && mv dillo-3.1.tar.xz dillo-3.1_fossa32.pet
+          mv build dillo-3.1 && tar -c -f dillo-3.1.tar dillo-3.1/ && xz -z -6 -e -T 0 dillo-3.1.tar && echo -n `md5sum dillo-3.1.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.tar.xz && mv dillo-3.1.tar.xz dillo-3.1_bionic64.pet
         
       # _______________________________________________________________________
       - name: Get App Version
