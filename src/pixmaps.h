@@ -14,7 +14,7 @@
 #define __PIXMAPS_H__
 
 /* XPM */
-static char * left_xpm[] = {
+static const char *const left_xpm[] = {
 "22 22 46 1",
 " 	c None",
 ".	c #000000",
@@ -86,7 +86,7 @@ static char * left_xpm[] = {
 "                      "};
 
 /* XPM */
-static char * right_xpm[] = {
+static const char *const right_xpm[] = {
 "22 22 46 1",
 " 	c None",
 ".	c #333333",
@@ -158,7 +158,7 @@ static char * right_xpm[] = {
 "                      "};
 
 /* XPM */
-static char * reload_xpm[] = {
+static const char *const reload_xpm[] = {
 "20 20 18 1",
 " 	c None",
 ".	c #5C7FCE",
@@ -230,7 +230,7 @@ static const char *const home_xpm[] = {
 };
 
 /* XPM */
-static char * save_xpm[] = {
+static const char *const save_xpm[] = {
 "22 22 62 1",
 " 	c None",
 ".	c #5959CB",
@@ -421,7 +421,7 @@ static const char *const stop_xpm[] = {
 "                      "};
 
 /* XPM */
-static char * bm_xpm[] = {
+static const char *const bm_xpm[] = {
 "20 20 285 2",
 "  	c None",
 ". 	c #E1DDE3",
@@ -730,7 +730,7 @@ static char * bm_xpm[] = {
 "      X+Y+Z+`+ @.@+@@@#@$@%@&@*@        "};
 
 /* XPM */
-static char * tools_xpm[] = {
+static const char *const tools_xpm[] = {
 "22 22 75 1",
 " 	c None",
 ".	c #5877CB",
@@ -830,7 +830,7 @@ static char * tools_xpm[] = {
 "                      ",
 "                      "};
 /* XPM */
-static char * newtab_xpm[] = {
+static const char *const newtab_xpm[] = {
 "22 22 75 1",
 " 	c None",
 "B	c #5877CB",
@@ -934,7 +934,7 @@ static char * newtab_xpm[] = {
 /* Small icons here */
 
 /* XPM */
-static char * left_s_xpm[] = {
+static const char *const left_s_xpm[] = {
 "22 22 46 1",
 " 	c None",
 ".	c #000000",
@@ -1005,7 +1005,7 @@ static char * left_s_xpm[] = {
 "                   .  ",
 "                      "};
 /* XPM */
-static char * right_s_xpm[] = {
+static const char *const right_s_xpm[] = {
 "22 22 46 1",
 " 	c None",
 ".	c #333333",
@@ -1076,7 +1076,7 @@ static char * right_s_xpm[] = {
 "                   .  ",
 "                      "};
 /* XPM */
-static char * reload_s_xpm[] = {
+static const char *const reload_s_xpm[] = {
 "20 20 18 1",
 " 	c None",
 ".	c #5C7FCE",
@@ -1146,7 +1146,7 @@ static const char *const home_s_xpm[] = {
 "                    "
 };
 /* XPM */
-static char * save_s_xpm[] = {
+static const char *const save_s_xpm[] = {
 "22 22 62 1",
 " 	c None",
 ".	c #5959CB",
@@ -1335,7 +1335,7 @@ static const char *const stop_s_xpm[] = {
 "      .........       ",
 "                      "};
 /* XPM */
-static char * bm_s_xpm[] = {
+static const char *const bm_s_xpm[] = {
 "20 20 285 2",
 "  	c None",
 ". 	c #E1DDE3",
@@ -1643,7 +1643,7 @@ static char * bm_s_xpm[] = {
 "    H+I+J+K+L+M+N+O+P+Q+R+S+T+U+V+W+    ",
 "      X+Y+Z+`+ @.@+@@@#@$@%@&@*@        "};
 /* XPM */
-static char * tools_s_xpm[] = {
+static const char *const tools_s_xpm[] = {
 "22 22 75 1",
 " 	c None",
 ".	c #5877CB",
@@ -1744,7 +1744,7 @@ static char * tools_s_xpm[] = {
 "                      "};
 
 /* XPM */
-static char *newtab_s_xpm[] = {
+static const char *const  newtab_s_xpm[] = {
 "22 22 75 1",
 " 	c None",
 "B	c #5877CB",
@@ -1896,7 +1896,7 @@ static const char *const new_s_xpm[] = {
 "  .     .  "};
 
 /* XPM */
-static char * search_xpm[] = {
+static const char *const search_xpm[] = {
 "14 16 14 1",
 " 	c None",
 ".	c #3838B0",
@@ -1930,7 +1930,7 @@ static char * search_xpm[] = {
 "         ;;   "};
 
 /* XPM */
-static char * help_xpm[] = {
+static const char *const help_xpm[] = {
 "14 16 7 1",
 " 	c None",
 ".	c #3766A4",
