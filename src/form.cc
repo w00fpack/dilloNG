@@ -453,6 +453,11 @@ void Html_tag_open_input(DilloHtml *html, const char *tag, int tagsize)
    name = a_Html_get_attr_wdef(html, tag, tagsize, "name", NULL);
    type = a_Html_get_attr_wdef(html, tag, tagsize, "type", "");
 
+   if (a_Html_get_attr(html, tag, tagsize, "hidden")) {
+	   // TODO: set type to 'hidden' directly, since I don't think attribute is used
+      type = a_Html_get_attr_wdef(html, tag, tagsize, "type", "hidden");
+   }
+
    init_str = NULL;
    inp_type = DILLO_HTML_INPUT_UNKNOWN;
    if (!dStrAsciiCasecmp(type, "password")) {
