@@ -109,6 +109,7 @@ static const KeyBinding_t default_keys[] = {
    { "right-tab"    , KEYS_RIGHT_TAB    , FL_CTRL   , FL_Page_Down    },
    { "close-tab"    , KEYS_CLOSE_TAB    , FL_CTRL   , 'w'             },
    { "find"         , KEYS_FIND         , FL_CTRL   , 'f'             },
+   { "find"         , KEYS_FIND         , 0   , '/'             },
    { "websearch"    , KEYS_WEBSEARCH    , 0   , 's'             },
    { "bookmarks"    , KEYS_BOOKMARKS    , 0   , 'b'             },
    { "reload"       , KEYS_RELOAD       , FL_CTRL   , 'r'             },
