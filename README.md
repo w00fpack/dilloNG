@@ -28,14 +28,18 @@ Please check under releases
 ## Requirements
 
 Please see https://www.dillo.org for requirement details.
-FLTK
+*FLTK 1.3
+* mbedtls
+
+### Optional
+* wget - for downloads
 
 ## INSTALLATION AND COMPILING
 
 There is an INSTALL file in this repository that might be of value.  You can also visit https://www.dillo.org for installation details details.
 
 ./autogen.sh
-./configure --enable-ssl
+./configure --prefix=/usr --sysconfdir=/etc --enable-ssl --with-ca-certs-dir=/etc/ssl/certs
 make
 make install
 
