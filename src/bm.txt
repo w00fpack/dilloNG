@@ -29,7 +29,7 @@ s2 https://teddit.net Teddit - Reddit alternative
 s2 https://www.reddit.com/.compact Reddit Compact
 s2 https://old.reddit.com/ Reddit Old
 s2 https://lite.cnn.com/en CNN Lite
-s2 https://thin.npr.org/ NPR Thin
+s2 https://text.npr.org/ NPR (Text)
 s2 https://www.reuters.com/commentary Reuters
 s2 https://www.newshound.co/editions/en-us/ News Hound
 s2 https://www.bbc.co.uk/ BBC
@@ -64,6 +64,7 @@ s6 https://txti.es/online-etiquette - Online Etiquette
 s7 https://inkscape.org/forums Inkscape
 s7 https://forum.puppylinux.com/ Puppy Linux
 s7 https://groups.google.com/g/yad-common Yad developr Mailing List
+s7 https://forums.raspberrypi.com Raspberry Pi Forum
 s8 https://www.amazon.com Amazon
 s8 https://ebay.com Ebay
 s8 https://craigslist.com Craigslist
@@ -75,10 +76,6 @@ s9 https://nitter.net/search?f=users&q=news Nitter (anonymous Twitter)
 s9 https://mastodon.social/@anonypla Mastodon
 s9 https://anonymous-story.com Instagram alternative
 s10 https://www.webdesignerdepot.com WebDesigner Depot
-s10 https://txtify.it Txtify (convert websites to text version)
-s10 https://localhost/tools/bitty.html Bitty convert locally js
-s10 https://localhost/tools/bitty.php Bitty convert locally
-s10 https://bitty.site Bitty Site - Store a webpage in it's URL
 s10 https://dir.xiph.org Xiph music streams directory
 s11 https://popularmechanics.com Popular Mechanics
 s11 https://popularscience.com Popular Science
