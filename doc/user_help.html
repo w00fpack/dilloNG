@@ -6,32 +6,47 @@
   <title> Dillo Web Browser Help</title>
 	<style>
 		h1 {
-			color: #2C2C76;
-			margin-left: 10em;
+			text-align: center;
+			color: #5232DA;
+			font-family: cursive;
+			font-size: 2.7em;
+			margin: 0;
+			padding: 0;
+		}
+
+		ul#menu {
+			padding-left:0;
+			list-style-position: inside;
+			list-style-type: none;
+		}
+
+		ul#menu a {
+			color: black;
+			text-decoration: none;
 		}
 	</style>
 </head>
 
-<body text="#0f0f0f" link="#2020e0" vlink="#403090" bgcolor="#A0AFF2">
+<body text="#0f0f0f" bgcolor="#A0AFF2">
 
-<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td><img src="db1.png" alt="The Dillo Web Browser" /></td>
-		<td width="100%"><img src="db2.png" height="124" width="100%" /></td>
-	</tr>
-</table>
-<h1>Welcome to Dillo</h1>
+	<table width="100%" cellspacing="0" cellpadding="0">
+		<tr>
+			<td><img src="db1.png" alt="The Dillo Web Browser"/></td>
+			<td width="100%"><img src="db2.png" height="80" width="100%" /></td>
+		</tr>
+	</table>
+<h1>Dillo Help</h1>
 
-<table>
+<table style="margin: 0;">
 	<tr>
 		<td>
-		<ul>
+		<ul id='menu'>
 			<li><a href='#basics'>Basics</a></li>
-			<li><a href='#usage'>Usage</a></li>
+			<li><a href='#navigation'>Navigation</a></li>
 			<li><a href='#tabs'>Tabs</a></li>
 			<li><a href='#bookmarks'>Bookmarks</a></li>
-			<li><a href='#keyboard'>Keyboard Hotkeys</a></li>
-			<li><a href='#navigation'>Navigation History</a></li>
+			<li><a href='#hotkeys'>Hotkeys</a></li>
+			<li><a href='#history'>History</a></li>
 			<li><a href='#downloads'>Downloads</a></li>
 			<li><a href='#find'>Find</a></li>
 			<li><a href='#search'>Search</a></li>
@@ -51,10 +66,10 @@
 
     <tr><td WIDTH="100%" bgcolor="#FAFAFA">
 		<p>
-		Dillo is a multi-platform graphical web browser known for its speed and small footprint
+		Welcome to Dillo!  Dillo is a Linux graphical web browser known for its speed and small footprint
 		</p>
 		<br />
-		Here are Dillo's <a href='about:splash'>About Page</a> and <a href='https://www.dillo.org'>Online website</a>
+		Here are links to Dillo's <a href='about:splash'>About Page</a> and <a href='https://www.dillo.org'>Online website</a>
 	</td>
 	</tr>
     <tr ALIGN=LEFT VALIGN=TOP><td bgcolor="lightgrey">
@@ -63,8 +78,6 @@
 
     <tr><td WIDTH="100%" bgcolor="#FAFAFA">
     <ul>
-      <li>You can tell a link from plain content by the hand-shaped cursor.
-
       <li> Besides browsing the web, Dillo also has basic file browsing
            capabilities included. So, entering <code>file:</code> in your
            Dillo URL window will give you the contents of your current
@@ -73,9 +86,9 @@
            directory...
 
       <li> Dillo, at this stage of development, is not ready
-           to render pages that use <b><font color="#5040a0">frames</font></b>.
-           Nevertheless, it comes with a tiny handler (lynx/w3m-like) that will
-           let you choose which frame to visit, one by one.
+           to render pages that use <b><font color="#5040a0">frames</font> directly</b>.
+           When frames are on a webpage, a menu will appear letting you
+           choose which frame to visit, one by one.
 
       <li> Dillo has <b><font color="#5040a0">context
            sensitive menus</font></b> using the right  mouse  button
@@ -83,11 +96,9 @@
            and Forward buttons, and the bug meter).
 
       <li> Some  of the functions in Dillo are handled by independent
-           processes.  For  instance,  downloads come through
+           processes.  For  instance, Dillo will continue downloading files, via
            <em><a href="http://www.gnu.org/software/wget/">wget</a></em>.
-           If Dillo exits, the downloads continue (more details
-           below).
-
+           ,If Dillo is exited.
 
     </ul>
     </td></tr>
@@ -95,7 +106,7 @@
 
   <table WIDTH="100%" BORDER=1 CELLSPACING=0 CELLPADDING=3>
     <tr ALIGN=LEFT VALIGN=TOP><td bgcolor="lightgrey">
-    <h4 id='usage'><font color="black">Usage:</font></h4>
+    <h4 id='navigation'><font color="black">Page Navigation:</font></h4>
     </td></tr>
 
     <tr><td BGCOLOR="#FAFAFA">
@@ -154,7 +165,7 @@
 
   <table WIDTH="100%" BORDER=1 CELLSPACING=0 CELLPADDING=3>
     <tr ALIGN=LEFT VALIGN=TOP><td bgcolor="lightgrey">
-    <h4 id='find'><font color="black">Find text:</font></h4>
+    <h4 id='find'><font color="black">Find text in the current web page:</font></h4>
     </td></tr>
 
     <tr><td bgcolor="#FAFAFA">
@@ -204,13 +215,12 @@
 
   <table WIDTH="100%" BORDER=1 CELLSPACING=0 CELLPADDING=3>
     <tr ALIGN=LEFT VALIGN=TOP><td bgcolor="lightgrey">
-    <h4 id='navigation'><font color="black">Navigation history:</font></h4>
+    <h4 id='history'><font color="black">History:</font></h4>
     </td></tr>
 
     <tr><td bgcolor="#FAFAFA">
     <p>
-    Currently, navigation history supports the navigation-stack model; just
-    right-click on the Back or Forward buttons and they will pop up!
+    Right-click on the Back or Forward buttons and they will pop up menus showing sites you have visited!
     <p> <u>Remember:</u>
     <ul>
       <li> These history menus are relative to the current page. </li>
@@ -386,14 +396,14 @@
 
  <table WIDTH="100%" BORDER=1 CELLSPACING=0 CELLPADDING=3>
    <tr ALIGN=LEFT VALIGN=TOP><td bgcolor="lightgrey">
-   <h4 id='keyboard'><font color="black">Keyboard shortcuts:</font></h4>
+   <h4 id='hotkeys'><font color="black">Keyboard Hotkeys:</font></h4>
    </td></tr>
    <tr><td bgcolor="#FAFAFA">
 <table border=1 width="100%">
 <tr><th>Shortcut                   <th>Mnemonic        <th>Function
 <tr><td>Ctrl-L                     <td>Location        <td>enter a new URL
-<tr><td>Ctrl-F or /                     <td>Find            <td>find text
-<tr><td>S                            <td>Search          <td>search the web
+<tr><td>Ctrl-F or /                     <td>Find            <td>find text in web page
+<tr><td>S                            <td>Search         <td>search the internet
 <tr><td>Ctrl-R                     <td>Reload          <td>reload current page
 <tr><td>Ctrl-N                     <td>New             <td>New browser window
 <tr><td>Ctrl-T                     <td>Tab             <td>New tab
