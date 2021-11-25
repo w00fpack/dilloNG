@@ -1,7 +1,9 @@
 SUBDIRS = speeddial_icons
 
 dist_doc_DATA = user_help.html \
-	speeddial.html
+	speeddial.html \
+	db1.png \
+	db2.png
 
 man_MANS = dillo.1
 EXTRA_DIST = \
