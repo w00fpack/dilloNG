@@ -18,6 +18,10 @@ jobs:
           sudo apt-get install libfltk1.3
           sudo apt-get install libfltk1.3-dev
           sudo apt-get install gcc-multilib g++-multilib
+        
+      - name: Install libMbedTLS
+        run: |
+          sudo apt-get install libmbedtls12 libmbedtls-dev
 
       - name: Code Checkout
         uses: actions/checkout@v2
@@ -29,7 +33,7 @@ jobs:
 
       # _______________________________________________________________________
       - name: Configure 64bit
-        run: ./configure --enable-ssl --prefix=/usr
+        run: ./configure --prefix=/usr --sysconfdir=/etc --enable-ssl
 
       - name: Make
         run: make
@@ -59,12 +63,12 @@ jobs:
       - name: Artifact Build - PET package
         run: |
           cd /home/runner/work/dilloNG/
-          echo "dillo-3.1|dillo|3.1||Internet|9204K||dillo-3.1.pet|libfltk1.3,libmbedcrypto3|Lightweight browser|ubuntu|focal||" > build/pet.specs
-          mv build dillo-3.1
-          tar -c -f dillo-3.1.tar dillo-3.1/
-          xz -z -6 -e -T 0 dillo-3.1.tar
-          echo -n `md5sum dillo-3.1.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.tar.xz
-          mv dillo-3.1.tar.xz dillo-3.1_fossa64.pet
+          echo "dillo-3.1.0|dillo|3.1.0||Internet|9204K||dillo-3.1.0.pet|libfltk1.3,libmbedtls1.2|Lightweight browser|ubuntu|focal||" > build/pet.specs
+          mv build dillo-3.1.0_fossa64
+          tar -c -f dillo-3.1.0_fossa64.tar dillo-3.1.0_fossa64/
+          xz -z -6 -e -T 0 dillo-3.1.0_fossa64.tar
+          echo -n `md5sum dillo-3.1.0_fossa64.tar.xz | cut -f 1 -d ' '` >> dillo-3.1.0_fossa64.tar.xz
+          mv dillo-3.1.0_fossa64.tar.xz dillo-3.1.0_fossa64.pet
         
       # _______________________________________________________________________
 #      - name: Configure 32 bit
@@ -158,8 +162,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: /home/runner/work/dilloNG/dillo-3.1_fossa64.pet
-          asset_name: dillo-3.1_fossa64.pet
+          asset_path: /home/runner/work/dilloNG/dillo-3.1.0_fossa64.pet
+          asset_name: dillo-3.1.0_fossa64.pet
           asset_content_type: application/x-xz
 
       # _______________________________________________________________________
