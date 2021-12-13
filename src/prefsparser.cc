@@ -180,6 +180,7 @@ void PrefsParser::parse(FILE *fp)
       { "load_images", &prefs.load_images, PREFS_BOOL, 0 },
       { "load_background_images", &prefs.load_background_images, PREFS_BOOL, 0 },
       { "media_player", &prefs.media_player, PREFS_STRING, 0 },
+      { "media_downloader", &prefs.media_downloader, PREFS_STRING, 0 },
       { "load_stylesheets", &prefs.load_stylesheets, PREFS_BOOL, 0 },
       { "middle_click_drags_page", &prefs.middle_click_drags_page,
         PREFS_BOOL, 0 },

@@ -45,6 +45,7 @@ typedef struct {
    char *http_referer;
    char *http_user_agent;
    char *media_player;
+   char *media_downloader;
    char *no_proxy;
    DilloUrl *start_page;
    DilloUrl *home;

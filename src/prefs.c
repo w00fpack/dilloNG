@@ -25,6 +25,7 @@
 #define PREFS_HTTP_USER_AGENT "Dillo/" VERSION
 #define PREFS_THEME           "none"
 #define PREFS_MEDIA_PLAYER           "mpv -ytdl-format='bestvideo[height<=?360]+bestaudio/best'"
+#define PREFS_MEDIA_DOWNLOADER           "cd ~ && yt-dlp --socket-timeout=60 -f '[height <=? 480]'"
 
 /*-----------------------------------------------------------------------------
  * Global Data
@@ -70,6 +71,7 @@ void a_Prefs_init(void)
    prefs.http_strict_transport_security = TRUE;
    prefs.http_user_agent = dStrdup(PREFS_HTTP_USER_AGENT);
    prefs.media_player = dStrdup(PREFS_MEDIA_PLAYER);
+   prefs.media_downloader = dStrdup(PREFS_MEDIA_DOWNLOADER);
    prefs.limit_text_width = FALSE;
    prefs.adjust_min_width = TRUE;
    prefs.adjust_table_min_width = TRUE;
@@ -146,6 +148,7 @@ void a_Prefs_freeall(void)
    dFree(prefs.http_referer);
    dFree(prefs.http_user_agent);
    dFree(prefs.media_player);
+   dFree(prefs.media_downloader);
    dFree(prefs.no_proxy);
    dFree(prefs.save_dir);
    for (i = 0; i < dList_length(prefs.search_urls); ++i)
