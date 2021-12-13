@@ -164,14 +164,16 @@ home="file:/usr/share/doc/dillo/speeddial.html"
 # (the prefix serves to search from the Location Bar. e.g. "dd dillo image")
 # NOTE:  THE FIRST search_url ENTRY WILL BE THE DEFAULT SEARCH ENGINE
 # IF NO SEARCH KEYWORD IS FOUND IN YOUR SEARCH REQUEST
-search_url="g Google http://www.google.com/search?source=hp&biw=&bih=&gbv=1&q=%s"
 search_url="d DuckDuckGo (https) https://duckduckgo.com/lite/?kp=-1&q=%s"
-search_url="w Wikipedia http://www.wikipedia.org/w/index.php?search=%s&go=Go"
 search_url="f Free Dictionary http://www.thefreedictionary.com/%s"
+search_url="g Google http://www.google.com/search?source=hp&biw=&bih=&gbv=1&q=%s"
+search_url="r Teddit https://teddit.net/r/all/search?q=%s"
 search_url="s Startpage (https) https://www.startpage.com/do/search?query=%s"
-search_url="t Twitter https://uhttps://nitter.net/search?f=users&q=%s"
+search_url="t Twitter https://nitter.net/search?f=users&q=%s"
 search_url="u Unsplash https://unsplash.com/s/photos/%s"
 search_url="v Deviant Art https://www.deviantart.com/search?q=%s"
+search_url="w Wikipedia http://www.wikipedia.org/w/index.php?search=%s&go=Go"
+search_url="c Wikimedia Commons https://commons.wikimedia.org/w/index.php?search=%s&title=Special:MediaSearch&go=Go&type=image"
 
 # If set, dillo will ask web servers to send pages in this language.
 # This setting does NOT change dillo's user interface.
