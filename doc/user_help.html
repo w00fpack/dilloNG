@@ -260,13 +260,25 @@
 			look like the following:
 	   </p>
 	   <code>http_proxy="https://localhost:9085/"</code>
-		<h5>Tor Proxy Tunneling</h5>
+		<h5>HTTPS Proxy Tunneling</h5>
 	   <p>
-		   If you would like to use a Tor server, modify your torrc file to include something similar to the following:
+		   If you would like to use a Tor server to access HTTPS traffic (not onion links), modify your torrc file to include something similar to the following:
 	   </p>
 	   <code>HTTPTunnelPort 9085</code>
 		<p><b>Note that all Tor traffic needs HTTPS URls, not HTTP</b></p>
 	   <p>
+		<h5>Routing all Dillo traffic through Tor</h5>
+		<p>
+			Use torsocks (which comes with the tor server package) to wrap all Dillo traffic through Tor
+		</p>
+		<code>torsocks dillo</code>
+		<p>First make sure your Tor server is restarted with the following modifications</p>
+		<code>
+SOCKSPort 9050 # has to be port 9050 for torify and torsocks to work
+ControlPort 9051
+CookieAuthentication 0 # to disable authentication. DO NOT do this on a shared computer
+		</code>
+		<p>Bookmarks, home page, and other local content will not be accessible with this method.  You will need to manually enter a URL to visit</p>
    </td></tr>
  </table>
 
