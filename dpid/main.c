@@ -31,6 +31,17 @@
 #include "../dpip/dpip.h"
 
 sigset_t mask_sigchld;
+char *srs_name;
+int srs_fd;
+int numdpis;
+int numsocks;
+struct dp *dpi_attr_list;
+Dlist *services_list;
+fd_set sock_set;
+enum {
+   no_errors,
+   dpid_srs_addrinuse /* dpid service request socket address already in use */
+} dpi_errno;
 
 
 /* Start a dpi filter plugin after accepting the pending connection
